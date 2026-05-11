@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-windows</TargetFrameworks>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <NoWarn>NU1701</NoWarn>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Specifies information for Assembly and Yak -->
+    <Version>1.0</Version>
+    <Title>RhinoWPFMVVVMIntro</Title>
+    <Company>RhinoWPFMVVVMIntro Authors</Company>
+    <Description>Description of RhinoWPFMVVVMIntro</Description>
+    <Nullable>enable</Nullable>
+    <BaseOutputPath>${OutputPath}</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="EmbeddedResources\plugin-utility.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedResources\plugin-utility.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RhinoCommon" Version="8.30.26103.11001" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <!-- For Windows only builds -->
+  <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <UseWpf>true</UseWpf>
+  </PropertyGroup>
+
+  <Target Name="CopyPluginToRhp" AfterTargets="Build">
+    <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(TargetName).rhp" SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>

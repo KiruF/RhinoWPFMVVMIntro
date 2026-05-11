@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <OutputFolder Condition="'$(OutputFolder)' == ''">$(MSBuildThisFileDirectory)..\AllBuild\</OutputFolder>
+    <OutputPath>$(OutputFolder)</OutputPath>
+    <BaseOutputPath>$(OutputFolder)</BaseOutputPath>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+</Project>
