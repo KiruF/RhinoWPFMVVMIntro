@@ -1,3 +1,4 @@
+using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 
@@ -12,8 +13,10 @@ namespace RhinoWPFMVVVMIntro.Services
 
         void SelectAllRhinoObjects();
 
-        void ScaleSelectedRhinoObjects();
-
         void Redraw();
+
+        void Replace(Guid rhinoObjectId, GeometryBase geometry);
+
+        List<GeometryBase> GetGeometryFromIds(IReadOnlyList<Guid> selectedObjectsIds);
     }
 }
