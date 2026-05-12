@@ -12,13 +12,13 @@ namespace RhinoWPFMVVVMIntro.Services
         {
         }
 
-        public void AssignLayers()
+        public void AssignLayers(IReadOnlyList<Guid> selObjIds)
         {
-            List<RhinoObject> selectedObjects = GetSelectedObjects();
-            foreach (RhinoObject rhinoObject in selectedObjects)
+            List<RhinoObject> selectedRhinoObjects = [.. selObjIds.Select(id => Doc.Objects.Find(id))];
+            foreach (RhinoObject rhinoObject in selectedRhinoObjects)
             {
                 if (!IsNextLayerAvailable(out int layerIdx))
-                    layerIdx = CreateNewRhinoLayer();
+                    layerIdx = CreateNewRhinoLayer(rhinoObject.Id.ToString());
 
                 AddObjectToLayer(rhinoObject, layerIdx);
             }
@@ -55,10 +55,10 @@ namespace RhinoWPFMVVVMIntro.Services
             return false;
         }
 
-        private int CreateNewRhinoLayer()
+        private int CreateNewRhinoLayer(string layerName)
         {
             RhinoDoc doc = GetDocOrThrow();
-            return doc.Layers.Add(new Layer());
+            return doc.Layers.Add(new Layer() { Name = layerName });
         }
 
         private void AddObjectToLayer(RhinoObject obj, int layerIdx)
