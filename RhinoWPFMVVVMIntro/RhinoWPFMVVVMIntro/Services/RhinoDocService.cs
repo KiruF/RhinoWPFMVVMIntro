@@ -6,7 +6,6 @@ using Rhino.Input.Custom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq;
 using System.Reflection;
 
 namespace RhinoWPFMVVVMIntro.Services
@@ -16,6 +15,7 @@ namespace RhinoWPFMVVVMIntro.Services
     /// </summary>
     public sealed class RhinoDocService : IRhinoDocService
     {
+
         ObjectEnumeratorSettings _settings = new ObjectEnumeratorSettings()
         {
             NormalObjects = true
@@ -39,32 +39,21 @@ namespace RhinoWPFMVVVMIntro.Services
 
         public void CrazyRotate()
         {
-            var selectedObjects = Doc.Objects.GetSelectedObjects(false, false);
-
-            //if (!selectedObjects.Any())
-            //{
-            //    GetObject getObjects = new GetObject();
-            //    getObjects.SetCommandPrompt("Select objects to CRAZY rotate");
-            //    getObjects.GetMultiple(1, 0);
-
-            //    if (getObjects.CommandResult() != Result.Success)
-            //        return;
-
-            //    selectedObjects = [.. getObjects.Objects().Select(x => x.Object())];
-            //}
-
+            RhinoDoc doc = GetDocOrThrow();
+            var selectedObjects = doc.Objects.GetSelectedObjects(false, false);
             Random random = new();
 
             foreach (RhinoObject rhinoObject in selectedObjects)
             {
                 double angle = RhinoMath.ToRadians(random.NextDouble() * 360.0);
-
                 Transform rotation = Transform.Rotation(
                     angle,
                     Vector3d.ZAxis,
                     Point3d.Origin);
 
-                Doc.Objects.Transform(rhinoObject, rotation, false);
+                GeometryBase geometryCopy = rhinoObject.DuplicateGeometry();
+                geometryCopy.Transform(rotation);
+                doc.Objects.Add(geometryCopy);
             }
 
             Redraw();
@@ -88,5 +77,9 @@ namespace RhinoWPFMVVVMIntro.Services
 
             doc.Views.Redraw();
         }
+
+        static RhinoDoc GetDocOrThrow()
+        => RhinoDoc.ActiveDoc
+        ?? throw new InvalidOperationException("Active doc is null.");
     }
 }

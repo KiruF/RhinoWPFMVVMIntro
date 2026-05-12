@@ -26,7 +26,7 @@
             <views:LayerAssignmentView />
 
             <Button Padding="8,4"
-                    Command="{Binding CrazyRotate}"
+                    Command="{Binding CrazyRotateButton}"
                     Content="CRAZY ROTATE" />   
 
         </StackPanel>

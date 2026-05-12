@@ -26,7 +26,7 @@ namespace RhinoWPFMVVVMIntro.ViewModels
                 ?? throw new ArgumentNullException(nameof(rhinoDocService));
 
             _selectAllRhObjs = new RelayCommand(SelectAllRhObjsMethod);
-            _crazyRotate = new RelayCommand(CRAZYROTATE);
+            _crazyRotate = new RelayCommand(CrazyRotateMethod);
         }
 
         /// <summary>
@@ -34,6 +34,9 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         /// </summary>
         public ICommand SelectAllRhObjs
             => _selectAllRhObjs;
+
+        public ICommand CrazyRotateButton
+            => _crazyRotate;
 
         public int Counter
         {
@@ -54,7 +57,7 @@ namespace RhinoWPFMVVVMIntro.ViewModels
             Counter++;
         }
 
-        void CRAZYROTATE(object? obj)
+        void CrazyRotateMethod(object? obj)
         {
             _rhinoDocService.CrazyRotate();
         }
