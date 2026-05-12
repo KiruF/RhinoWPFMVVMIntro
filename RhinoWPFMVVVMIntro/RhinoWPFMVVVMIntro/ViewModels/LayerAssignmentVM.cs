@@ -11,18 +11,18 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         private readonly ILayerAssignemntService _layerAssignemntService;
 
         public LayerAssignmentVM(ILayerAssignemntService layerAssignemntService)
-        { 
+        {
             _layerAssignemntService = layerAssignemntService
                 ?? throw new ArgumentNullException(nameof(layerAssignemntService));
 
             _assignLayersCommand = new RelayCommand(AssignLayers);
         }
 
-        public ICommand AssignLayersCommand 
+        public ICommand AssignLayersCommand
             => _assignLayersCommand;
 
         private void AssignLayers()
             => _layerAssignemntService.AssignLayers();
-        
+
     }
 }

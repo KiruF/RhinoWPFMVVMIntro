@@ -1,4 +1,3 @@
-using Rhino;
 using Rhino.PlugIns;
 using Rhino.UI;
 using RhinoWPFMVVVMIntro.Services;
