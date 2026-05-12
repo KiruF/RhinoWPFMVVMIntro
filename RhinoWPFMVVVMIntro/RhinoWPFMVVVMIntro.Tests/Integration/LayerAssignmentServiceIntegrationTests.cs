@@ -1,10 +1,10 @@
 ﻿using Rhino.Geometry;
 using RhinoWPFMVVVMIntro.Services;
+using RhinoWPFMVVVMIntro.Tests.Fixture;
 
-namespace RhinoWPFMVVVMIntro.Tests
+namespace RhinoWPFMVVVMIntro.Tests.Integration
 {
-    [TestFixture]
-    public class LayerAssignmentServiceIntegrationTests : GlobalSetup
+    public class LayerAssignmentServiceIntegrationTests : RhinoIntegrationTestFixture
     {
         [Test]
         public void LayerAssignmentVM_NoObjectIsLost()

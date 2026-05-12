@@ -1,4 +1,4 @@
-﻿using Rhino.Geometry;
+using Rhino.Geometry;
 using Rhino.Testing.Fixtures;
 using RhinoWPFMVVVMIntro.Services;
 using System;
@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RhinoWPFMVVVMIntro.Tests
+namespace RhinoWPFMVVVMIntro.Tests.Unit
 {
-    [TestFixture]
-    public class ScaleServiceUnitTests : RhinoSetupFixture
+    public class ScaleServiceUnitTests
     {
         [Test]
         public void Scale_NullGeometry_ThrowsArgumentNullException()
@@ -32,7 +31,5 @@ namespace RhinoWPFMVVVMIntro.Tests
             double volume = testGeometry.GetBoundingBox(true).Volume;
             Assert.That(volume, Is.EqualTo(8000).Within(0.01), "Expected volume to be 8000 after scaling by a factor of 2.");
         }
-
-
     }
 }

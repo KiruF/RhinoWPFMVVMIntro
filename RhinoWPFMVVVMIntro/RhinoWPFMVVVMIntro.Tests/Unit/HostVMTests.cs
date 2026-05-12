@@ -2,9 +2,8 @@ using Rhino.Geometry;
 using RhinoWPFMVVVMIntro.Services;
 using RhinoWPFMVVVMIntro.ViewModels;
 
-namespace RhinoWPFMVVVMIntro.Tests;
+namespace RhinoWPFMVVVMIntro.Tests.Unit;
 
-[TestFixture]
 public sealed class HostVMTests
 {
     [Test]
@@ -40,11 +39,6 @@ public sealed class HostVMTests
             SelectAllRhinoObjectsCallCount++;
         }
 
-        public void ScaleSelectedRhinoObjects()
-        {
-            ScaleSelectedRhinoObjectsCallCount++;
-        }
-
         public IReadOnlyList<Guid> GetSelectedObjectIds()
         {
             return [];
@@ -57,12 +51,12 @@ public sealed class HostVMTests
 
         public void Replace(Guid rhinoObjectId, GeometryBase geometry)
         {
-            throw new NotImplementedException();
+
         }
 
         public List<GeometryBase> GetGeometryFromIds(IReadOnlyList<Guid> selectedObjectsIds)
         {
-            throw new NotImplementedException();
+            return [];
         }
     }
 }

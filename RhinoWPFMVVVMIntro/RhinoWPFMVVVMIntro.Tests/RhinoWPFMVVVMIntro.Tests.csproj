@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
-    <PackageReference Include="Grasshopper" Version="8.28.26041.11001" />
+    <PackageReference Include="Grasshopper" Version="8.28.26041.11001" ExcludeAssets="runtime" />
 	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
 	<PackageReference Include="NUnit" Version="4.6.0" />
     <PackageReference Include="NUnit.Analyzers" Version="4.13.0">
@@ -37,6 +37,10 @@
 
 	<Target Name="CopyPluginAssemblyForTestHost" AfterTargets="Build">
 		<Copy SourceFiles="..\AllBuild\net8.0-windows\RhinoWPFMVVVMIntro.rhp" DestinationFiles="$(OutputPath)RhinoWPFMVVVMIntro.dll" SkipUnchangedFiles="true" />
+	</Target>
+
+	<Target Name="RemoveLocalEtoAssembliesForRhinoTesting" AfterTargets="Build">
+		<Delete Files="$(OutputPath)Eto.dll;$(OutputPath)Ed.Eto.dll;$(OutputPath)Rhino.UI.dll" />
 	</Target>
 
 </Project>

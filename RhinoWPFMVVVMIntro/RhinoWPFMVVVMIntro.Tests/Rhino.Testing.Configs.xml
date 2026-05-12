@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Settings>
 
-  <RhinoSystemDirectory>C:\Program Files\Rhino 8\System</RhinoSystemDirectory>
+  <RhinoSystemDirectory>D:\Program Files\Rhino 8\System</RhinoSystemDirectory>
   <CreateRhinoDoc>true</CreateRhinoDoc>
   <CreateRhinoView>false</CreateRhinoView>
-
-	<RunSettings>
-		<RunConfiguration>
-			<TargetPlatform>x64</TargetPlatform>
-		</RunConfiguration>
-	</RunSettings>
 	
 </Settings>

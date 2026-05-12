@@ -1,10 +1,8 @@
 ﻿using RhinoWPFMVVVMIntro.Services;
 using RhinoWPFMVVVMIntro.ViewModels;
 
-namespace RhinoWPFMVVVMIntro.Tests
+namespace RhinoWPFMVVVMIntro.Tests.Unit
 {
-    [TestFixture]
-
     public sealed class LayerAssignmentServiceUnitTests
     {
         [Test]
