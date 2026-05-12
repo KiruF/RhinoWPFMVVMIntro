@@ -1,3 +1,4 @@
+using Rhino.Geometry;
 using RhinoWPFMVVVMIntro.Services;
 using RhinoWPFMVVVMIntro.ViewModels;
 
@@ -52,6 +53,16 @@ public sealed class HostVMTests
         public void Redraw()
         {
             ScaleSelectedRhinoObjectsCallCount++;
+        }
+
+        public void Replace(Guid rhinoObjectId, GeometryBase geometry)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<GeometryBase> GetGeometryFromIds(IReadOnlyList<Guid> selectedObjectsIds)
+        {
+            throw new NotImplementedException();
         }
     }
 }

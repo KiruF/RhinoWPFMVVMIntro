@@ -25,7 +25,7 @@
 
             <Button Padding="8,4"
                     Command="{Binding ScaleSelectedRhObjs}"
-                    Content="scale all rhino objects" />
+                    Content="scale selected rhino objects" />
 
             <views:LayerAssignmentView />
 

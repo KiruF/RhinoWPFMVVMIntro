@@ -1,7 +1,9 @@
+using Rhino.Geometry;
 using RhinoWPFMVVVMIntro.Base;
 using RhinoWPFMVVVMIntro.Services;
 using RhinoWPFMVVVMIntro.ViewModels.Utility;
 using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace RhinoWPFMVVVMIntro.ViewModels
@@ -36,12 +38,12 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         public ICommand SelectAllRhObjs
             => _selectAllRhObjs;
 
-        public ICommand ScaleSelectedRhObjs 
+        public ICommand ScaleSelectedRhObjs
             => _scaleAllRhObjs;
 
-        public int Counter 
-        { 
-            get=> _counter; 
+        public int Counter
+        {
+            get => _counter;
             set
             {
                 if (_counter == value)
@@ -58,10 +60,18 @@ namespace RhinoWPFMVVVMIntro.ViewModels
             Counter++;
         }
 
-        void ScaleSelectedRhObjsMethod(object? obj) 
+        void ScaleSelectedRhObjsMethod(object? obj)
         {
-            _rhinoDocService.ScaleSelectedRhinoObjects(); 
-            Counter++;
+            IReadOnlyList<Guid> selectedObjectsIds = _rhinoDocService.GetSelectedObjectIds();
+            List<GeometryBase> geometries = _rhinoDocService.GetGeometryFromIds(selectedObjectsIds);
+
+            ScaleService scaleService = new ScaleService();
+
+            for (int i = 0; i < geometries.Count; i++)
+            {
+                GeometryBase scaledGeometry = scaleService.Scale(geometries[i], 2.0);
+                _rhinoDocService.Replace(selectedObjectsIds[i], scaledGeometry);
+            }
         }
     }
 }
