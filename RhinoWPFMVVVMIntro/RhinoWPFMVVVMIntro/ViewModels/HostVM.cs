@@ -12,6 +12,7 @@ namespace RhinoWPFMVVVMIntro.ViewModels
     public sealed class HostVM : PropertyChangedNotifier
     {
         readonly RelayCommand _selectAllRhObjs;
+        readonly RelayCommand _crazyRotate;
         readonly IRhinoDocService _rhinoDocService;
 
         int _counter = 0;
@@ -25,6 +26,7 @@ namespace RhinoWPFMVVVMIntro.ViewModels
                 ?? throw new ArgumentNullException(nameof(rhinoDocService));
 
             _selectAllRhObjs = new RelayCommand(SelectAllRhObjsMethod);
+            _crazyRotate = new RelayCommand(CRAZYROTATE);
         }
 
         /// <summary>
@@ -32,6 +34,9 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         /// </summary>
         public ICommand SelectAllRhObjs
             => _selectAllRhObjs;
+
+        public ICommand CrazyRotate
+          => _crazyRotate;
 
         public int Counter 
         { 
@@ -50,6 +55,11 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         {
             _rhinoDocService.SelectAllRhinoObjects();
             Counter++;
+        }
+
+        void CRAZYROTATE(object? obj)
+        {
+            _rhinoDocService.CrazyRotate();
         }
     }
 }

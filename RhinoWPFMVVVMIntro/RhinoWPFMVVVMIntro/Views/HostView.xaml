@@ -22,6 +22,11 @@
                     Command="{Binding SelectAllRhObjs}"
                     Content="select all rhino objects" />
 
+            <Button Padding="8,4"
+                    Command="{Binding CrazyRotate}"
+                    Content="CRAZY ROTATE" />   
+
         </StackPanel>
     </Grid>
+    
 </UserControl>

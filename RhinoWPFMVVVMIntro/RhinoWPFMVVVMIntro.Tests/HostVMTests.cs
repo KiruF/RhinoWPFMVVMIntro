@@ -26,6 +26,10 @@ public sealed class HostVMTests
             SelectAllRhinoObjectsCallCount++;
         }
 
+        public void CrazyRotate()
+        {
+
+        }
         public void Redraw()
         {
         }

@@ -7,6 +7,8 @@ namespace RhinoWPFMVVVMIntro.Services
     {
         void SelectAllRhinoObjects();
 
+        void CrazyRotate();
+
         void Redraw();
     }
 }
