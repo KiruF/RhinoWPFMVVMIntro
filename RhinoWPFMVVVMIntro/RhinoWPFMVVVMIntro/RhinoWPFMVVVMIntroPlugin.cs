@@ -23,6 +23,10 @@ namespace RhinoWPFMVVVMIntro
             RhinoDocService = new RhinoDocService(
                 RhinoDoc.ActiveDoc
                     ?? throw new InvalidOperationException("Rhino active document was not found"));
+
+            LayerAssignmentService = new LayerAssignmentService(
+                RhinoDoc.ActiveDoc
+                    ?? throw new InvalidOperationException("Rhino active document was not found"));
         }
 
         /// <summary>
@@ -43,6 +47,7 @@ namespace RhinoWPFMVVVMIntro
         /// Provides plugin-wide access to Rhino document operations.
         /// </summary>
         public IRhinoDocService RhinoDocService { get; }
+        public ILayerAssignemntService LayerAssignmentService { get; }
 
         protected override LoadReturnCode OnLoad(ref string errorMessage)
         {
