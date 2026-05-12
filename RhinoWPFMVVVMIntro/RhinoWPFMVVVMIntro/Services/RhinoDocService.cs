@@ -77,9 +77,5 @@ namespace RhinoWPFMVVVMIntro.Services
 
             return selectedGeometries;
         }
-
-        static RhinoDoc GetDocOrThrow()
-            => RhinoDoc.ActiveDoc
-            ?? throw new InvalidOperationException("Active doc is null.");
     }
 }
