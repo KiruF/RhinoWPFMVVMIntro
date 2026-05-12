@@ -1,4 +1,5 @@
-﻿using Rhino.Geometry;
+﻿using Rhino.DocObjects;
+using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,31 @@ namespace RhinoWPFMVVVMIntro.Services
 
         }
 
-        public GeometryBase Move(GeometryBase geometry, Vector3d translation)
+        public GeometryBase Move(GeometryBase? geometry)
         {
+            ArgumentNullException.ThrowIfNull(geometry);
+            Vector3d translation = GetTranslationDirection(geometry);
             Transform xform = Transform.Translation(translation);
             GeometryBase movedGeometry = geometry.Duplicate();
-            movedGeometry.Transform(xform);
-            return movedGeometry;
+            _ = movedGeometry.Transform(xform);
 
+            return movedGeometry;
         }
         
+        private static Vector3d GetTranslationDirection(GeometryBase geometry)
+        {
+            BoundingBox bbox = geometry.GetBoundingBox(true);
+            Point3d center = bbox.Center;
+            Vector3d direction = center - Point3d.Origin;
+            if (direction.IsTiny())
+                throw new Exception("Cannot determine translation direction for geometry at the origin.");
+
+            direction.Unitize();
+            direction *= 10.0;
+
+            return direction;
+        }
+
     }
 }
  

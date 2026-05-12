@@ -38,6 +38,7 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         /// </summary>
         public ICommand SelectAllRhObjs
             => _selectAllRhObjs;
+
         public ICommand MoveAwaySelectedRhObjs
             => _moveAwaySelectedRhObjs;
 
@@ -64,20 +65,15 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         }
         void MoveAwaySelectedRhObjsMetod(object? obj)
         {
-            //TODO: get selected objects
             IReadOnlyList<Guid> selectedObjIds = _rhinoDocService.GetSelectedObjectIds();
-            List<GeometryBase> geometries =_rhinoDocService.GetgeometryFromIds(selectedObjIds);
-            //TODO: move selected objects
+            List<GeometryBase> geometries = _rhinoDocService.GetGeometryFromIds(selectedObjIds);
+            
             MoveGeometryService moveService = new MoveGeometryService();
-            foreach (GeometryBase geom in geometries)
-            { 
-                GeometryBase movedGeometry = moveService.Move
+            for (int i = 0; i < geometries.Count; i++)
+            {
+                GeometryBase movedGeometry = moveService.Move(geometries[i]);
+                _rhinoDocService.Replace(selectedObjIds[i], movedGeometry);
             }
-
-
-            //TODO: replace moved geometry in document
-            _rhinoDocService.MoveAwaySelectedRhinoObjects();
-            Counter++;
         }
 
         void ScaleSelectedRhObjsMethod(object? obj)

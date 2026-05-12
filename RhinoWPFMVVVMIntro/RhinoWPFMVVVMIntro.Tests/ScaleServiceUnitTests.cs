@@ -32,7 +32,5 @@ namespace RhinoWPFMVVVMIntro.Tests
             double volume = testGeometry.GetBoundingBox(true).Volume;
             Assert.That(volume, Is.EqualTo(8000).Within(0.01), "Expected volume to be 8000 after scaling by a factor of 2.");
         }
-
-
     }
 }

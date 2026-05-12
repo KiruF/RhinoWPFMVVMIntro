@@ -56,42 +56,6 @@ namespace RhinoWPFMVVVMIntro.Services
             doc.Views.Redraw(); 
         }
 
-
-        public void MoveAwaySelectedRhinoObjects()
-        {
-            RhinoDoc doc = GetDocOrThrow();
-            MoveGeometryService moveService = new MoveGeometryService();
-
-            foreach (RhinoObject rhinoObject in doc.Objects.GetSelectedObjects(false, false))
-            {
-                BoundingBox bbox = rhinoObject.Geometry.GetBoundingBox(true);
-                Point3d center = bbox.Center;
-
-                Vector3d direction = center - Point3d.Origin;
-
-                if (direction.IsTiny())
-                    continue;
-
-                direction.Unitize();
-                direction *= 10.0;
-
-                GeometryBase movedGeometry =
-                    moveService.Move(rhinoObject.Geometry, direction);
-               Replace(rhinoObject.Id, movedGeometry);
-            }
-            Redraw();
-        }
-
-        public void Add (GeometryBase geometry)
-        {
-            RhinoDoc doc = GetDocOrThrow();
-            doc.Objects.Add(geometry);
-        }
-
-        static RhinoDoc GetDocOrThrow()
-            => RhinoDoc.ActiveDoc
-            ?? throw new InvalidOperationException("Active doc is null.");
-
         public List<GeometryBase> GetGeometryFromIds(IReadOnlyList<Guid> selectedObjectsIds)
         {
             RhinoDoc doc = GetDocOrThrow();
@@ -109,5 +73,15 @@ namespace RhinoWPFMVVVMIntro.Services
 
             return selectedGeometries;
         }
+
+        public void Add (GeometryBase geometry)
+        {
+            RhinoDoc doc = GetDocOrThrow();
+            doc.Objects.Add(geometry);
+        }
+
+        static RhinoDoc GetDocOrThrow()
+            => RhinoDoc.ActiveDoc
+            ?? throw new InvalidOperationException("Active doc is null.");
     }
 }
