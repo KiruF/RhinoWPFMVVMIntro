@@ -19,10 +19,17 @@ namespace RhinoWPFMVVVMIntro
         public RhinoWPFMVVVMIntroPlugin()
         {
             _instance = this;
+            RhinoDoc.NewDocument += OnNewDoc;
+        }
 
-            RhinoDocService = new RhinoDocService(
-                RhinoDoc.ActiveDoc
-                    ?? throw new InvalidOperationException("Rhino active document was not found"));
+        void OnNewDoc(object? sender, DocumentEventArgs e)
+        {
+            RhinoDoc.NewDocument -= OnNewDoc;
+
+            RhinoDoc doc = e.Document
+                ?? throw new InvalidOperationException("Rhino active document was not found");
+
+            RhinoDocService = new RhinoDocService(e.Document);
         }
 
         /// <summary>
@@ -42,7 +49,7 @@ namespace RhinoWPFMVVVMIntro
         /// <summary>
         /// Provides plugin-wide access to Rhino document operations.
         /// </summary>
-        public IRhinoDocService RhinoDocService { get; }
+        public IRhinoDocService RhinoDocService { get; private set; }
 
         protected override LoadReturnCode OnLoad(ref string errorMessage)
         {
