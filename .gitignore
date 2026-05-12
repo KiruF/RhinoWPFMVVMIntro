@@ -431,5 +431,4 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
-# Project build output
-/RhinoWPFMVVVMIntro/AllBuild/
+/RhinoWPFMVVVMIntro/AllBuild/net8.0-windows/RhinoWPFMVVVMIntro.dll

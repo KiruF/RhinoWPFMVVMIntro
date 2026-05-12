@@ -1,5 +1,6 @@
 using Rhino;
 using Rhino.DocObjects;
+using Rhino.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,13 +43,39 @@ namespace RhinoWPFMVVVMIntro.Services
             return objIds;
         }
 
+        public void ScaleSelectedRhinoObjects()
+        {
+            RhinoDoc doc = GetDocOrThrow();
+
+            IReadOnlyList<Guid> selectedObjectsIds = GetSelectedObjectIds();
+            List<RhinoObject> rhinoObjects = [.. selectedObjectsIds.Select(id => doc.Objects.Find(id))];
+
+            ScaleService scaleService = new ScaleService();
+
+            foreach (RhinoObject rhinoObject in rhinoObjects)
+            {
+                GeometryBase geometryScaled = scaleService.Scale(rhinoObject.Geometry, 10.0);
+                Replace(rhinoObject.Id, geometryScaled);
+            }
+
+            Redraw();
+        }
+
+        public void Replace(Guid objectsId, GeometryBase geometry)
+        {
+            RhinoDoc doc = GetDocOrThrow();
+
+            doc.Objects.Replace(objectsId, geometry, false);
+        }
+
         public void Redraw()
         {
-            RhinoDoc doc = RhinoDoc.ActiveDoc;
-            if (doc == null)
-                return;
-
+            RhinoDoc doc = GetDocOrThrow();
             doc.Views.Redraw();
         }
+
+        static RhinoDoc GetDocOrThrow()
+            => RhinoDoc.ActiveDoc
+            ?? throw new InvalidOperationException("Active doc is null.");
     }
 }

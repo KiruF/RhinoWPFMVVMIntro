@@ -12,6 +12,8 @@ namespace RhinoWPFMVVVMIntro.Services
 
         void SelectAllRhinoObjects();
 
+        void ScaleSelectedRhinoObjects();
+
         void Redraw();
     }
 }
