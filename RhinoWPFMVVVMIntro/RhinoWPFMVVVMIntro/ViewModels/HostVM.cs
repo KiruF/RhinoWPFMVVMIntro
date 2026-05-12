@@ -1,5 +1,7 @@
 using RhinoWPFMVVVMIntro.Base;
+using RhinoWPFMVVVMIntro.Services;
 using RhinoWPFMVVVMIntro.ViewModels.Utility;
+using System;
 using System.Windows.Input;
 
 namespace RhinoWPFMVVVMIntro.ViewModels
@@ -10,13 +12,19 @@ namespace RhinoWPFMVVVMIntro.ViewModels
     public sealed class HostVM : PropertyChangedNotifier
     {
         readonly RelayCommand _selectAllRhObjs;
+        readonly IRhinoDocService _rhinoDocService;
+
+        int _counter = 0;
 
         /// <summary>
         /// Initializes host view commands.
         /// </summary>
-        public HostVM()
+        public HostVM(IRhinoDocService rhinoDocService)
         {
-            _selectAllRhObjs = new RelayCommand(_ => SelectAllRhinoObjects());
+            _rhinoDocService = rhinoDocService
+                ?? throw new ArgumentNullException(nameof(rhinoDocService));
+
+            _selectAllRhObjs = new RelayCommand(SelectAllRhObjsMethod);
         }
 
         /// <summary>
@@ -25,11 +33,23 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         public ICommand SelectAllRhObjs
             => _selectAllRhObjs;
 
-        void SelectAllRhinoObjects()
+        public int Counter 
+        { 
+            get=> _counter; 
+            set
+            {
+                if (_counter == value)
+                    return;
+
+                _counter = value;
+                OnPropertyChanged();
+            }
+        }
+
+        void SelectAllRhObjsMethod(object? obj)
         {
-            RhinoWPFMVVVMIntroPlugin.Instance
-                .RhinoDocService
-                .SelectAllRhinoObjects();
+            _rhinoDocService.SelectAllRhinoObjects();
+            Counter++;
         }
     }
 }

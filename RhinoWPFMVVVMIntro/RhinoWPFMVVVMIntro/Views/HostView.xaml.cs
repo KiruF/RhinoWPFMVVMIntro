@@ -1,5 +1,8 @@
+using RhinoWPFMVVVMIntro.ViewModels;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
+using Plugin = RhinoWPFMVVVMIntro.RhinoWPFMVVVMIntroPlugin;
 
 namespace RhinoWPFMVVVMIntro.Views
 {
@@ -12,6 +15,11 @@ namespace RhinoWPFMVVVMIntro.Views
         public HostView()
         {
             InitializeComponent();
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+                return;
+
+            DataContext = new HostVM(Plugin.Instance.RhinoDocService);
         }
     }
 }

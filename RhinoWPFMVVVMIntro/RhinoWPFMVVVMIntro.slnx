@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="RhinoWPFMVVVMIntro.Tests/RhinoWPFMVVVMIntro.Tests.csproj" Id="1c5870da-9761-48e7-83f5-78364157e774" />
   <Project Path="RhinoWPFMVVVMIntro/RhinoWPFMVVVMIntro.csproj" />
 </Solution>

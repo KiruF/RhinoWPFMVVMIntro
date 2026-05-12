@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Grasshopper" Version="8.28.26041.11001" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+	<PackageReference Include="NUnit" Version="4.6.0" />
+    <PackageReference Include="NUnit.Analyzers" Version="4.13.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter" Version="6.2.0" />
+	<PackageReference Include="Rhino.Testing" Version="8.0.28-beta" />
+	<PackageReference Include="RhinoCommon" Version="8.28.26041.11001" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RhinoWPFMVVVMIntro\RhinoWPFMVVVMIntro.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<None Update="Rhino.Testing.Configs.xml" CopyToOutputDirectory="Always" />
+	</ItemGroup>
+
+	<Target Name="CopyPluginAssemblyForTestHost" AfterTargets="Build">
+		<Copy SourceFiles="..\AllBuild\net8.0-windows\RhinoWPFMVVVMIntro.rhp" DestinationFiles="$(OutputPath)RhinoWPFMVVVMIntro.dll" SkipUnchangedFiles="true" />
+	</Target>
+
+</Project>

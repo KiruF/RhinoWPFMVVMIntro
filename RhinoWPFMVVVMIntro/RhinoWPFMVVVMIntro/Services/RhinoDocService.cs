@@ -7,7 +7,7 @@ namespace RhinoWPFMVVVMIntro.Services
     /// <summary>
     /// Handles interaction with Rhino documents and Rhino objects.
     /// </summary>
-    public sealed class RhinoDocService
+    public sealed class RhinoDocService : IRhinoDocService
     {
         public readonly RhinoDoc Doc;
 

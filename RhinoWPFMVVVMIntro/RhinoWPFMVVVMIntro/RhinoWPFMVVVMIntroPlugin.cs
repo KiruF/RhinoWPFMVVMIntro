@@ -19,6 +19,7 @@ namespace RhinoWPFMVVVMIntro
         public RhinoWPFMVVVMIntroPlugin()
         {
             _instance = this;
+
             RhinoDocService = new RhinoDocService(
                 RhinoDoc.ActiveDoc
                     ?? throw new InvalidOperationException("Rhino active document was not found"));
@@ -41,7 +42,7 @@ namespace RhinoWPFMVVVMIntro
         /// <summary>
         /// Provides plugin-wide access to Rhino document operations.
         /// </summary>
-        public RhinoDocService RhinoDocService { get; }
+        public IRhinoDocService RhinoDocService { get; }
 
         protected override LoadReturnCode OnLoad(ref string errorMessage)
         {
