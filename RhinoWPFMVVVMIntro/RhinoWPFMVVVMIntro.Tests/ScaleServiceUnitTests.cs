@@ -1,4 +1,5 @@
 ﻿using Rhino.Geometry;
+using Rhino.Testing.Fixtures;
 using RhinoWPFMVVVMIntro.Services;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace RhinoWPFMVVVMIntro.Tests
 {
     [TestFixture]
-    public class ScaleServiceUnitTests
+    public class ScaleServiceUnitTests : RhinoSetupFixture
     {
         [Test]
         public void Scale_NullGeometry_ThrowsArgumentNullException()
