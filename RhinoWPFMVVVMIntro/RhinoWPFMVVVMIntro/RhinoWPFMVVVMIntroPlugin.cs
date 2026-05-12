@@ -26,6 +26,13 @@ namespace RhinoWPFMVVVMIntro
         {
             RhinoDoc.NewDocument -= OnNewDoc;
 
+            RhinoDocService = new RhinoDocService(
+                RhinoDoc.ActiveDoc
+                    ?? throw new InvalidOperationException("Rhino active document was not found"));
+
+            LayerAssignmentService = new LayerAssignmentService(
+                RhinoDoc.ActiveDoc
+                    ?? throw new InvalidOperationException("Rhino active document was not found"));
             RhinoDoc doc = e.Document
                 ?? throw new InvalidOperationException("Rhino active document was not found");
 

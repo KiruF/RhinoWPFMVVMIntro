@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:RhinoWPFMVVVMIntro.ViewModels"
+             xmlns:views="clr-namespace:RhinoWPFMVVVMIntro.Views"
              mc:Ignorable="d"
              d:DesignHeight="700"
              d:DesignWidth="400"
@@ -20,7 +21,9 @@
 
             <Button Padding="8,4"
                     Command="{Binding SelectAllRhObjs}"
-                    Content="select all rhino objects" />
+                    Content="Select all rhino objects" />
+
+            <views:LayerAssignmentView />
 
         </StackPanel>
     </Grid>
