@@ -38,6 +38,8 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         /// </summary>
         public ICommand SelectAllRhObjs
             => _selectAllRhObjs;
+        public ICommand MoveAwaySelectedRhObjs
+            => _moveAwaySelectedRhObjs;
 
         public ICommand MoveAwaySelectedRhObjs
             => _moveAwaySelectedRhObjs;

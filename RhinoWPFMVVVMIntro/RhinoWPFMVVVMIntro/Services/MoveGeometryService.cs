@@ -25,7 +25,7 @@ namespace RhinoWPFMVVVMIntro.Services
 
             return movedGeometry;
         }
-        
+
         private static Vector3d GetTranslationDirection(GeometryBase geometry)
         {
             BoundingBox bbox = geometry.GetBoundingBox(true);
@@ -39,7 +39,7 @@ namespace RhinoWPFMVVVMIntro.Services
 
             return direction;
         }
-
+        
     }
 }
  
