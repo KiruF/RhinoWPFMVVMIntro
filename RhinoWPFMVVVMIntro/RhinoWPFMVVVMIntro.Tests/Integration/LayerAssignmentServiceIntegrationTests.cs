@@ -1,6 +1,5 @@
 ﻿using Rhino.Geometry;
 using RhinoWPFMVVVMIntro.Services;
-using RhinoWPFMVVVMIntro.Tests.Fixture;
 
 namespace RhinoWPFMVVVMIntro.Tests.Integration
 {

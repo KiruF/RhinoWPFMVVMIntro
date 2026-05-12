@@ -1,6 +1,6 @@
 using Rhino;
 
-namespace RhinoWPFMVVVMIntro.Tests.Fixture;
+namespace RhinoWPFMVVVMIntro.Tests;
 
 public abstract class RhinoIntegrationTestFixture
 {

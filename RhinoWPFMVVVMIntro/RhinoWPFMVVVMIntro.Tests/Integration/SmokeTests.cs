@@ -1,5 +1,3 @@
-using RhinoWPFMVVVMIntro.Tests.Fixture;
-
 namespace RhinoWPFMVVVMIntro.Tests.Integration;
 
 public sealed class SmokeTests : RhinoIntegrationTestFixture
