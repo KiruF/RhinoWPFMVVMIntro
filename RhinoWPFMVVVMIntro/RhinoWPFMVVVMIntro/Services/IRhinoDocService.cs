@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace RhinoWPFMVVVMIntro.Services
 {
     /// <summary>
@@ -5,6 +8,8 @@ namespace RhinoWPFMVVVMIntro.Services
     /// </summary>
     public interface IRhinoDocService
     {
+        IReadOnlyList<Guid> GetSelectedObjectIds();
+
         void SelectAllRhinoObjects();
 
         void CrazyRotate();

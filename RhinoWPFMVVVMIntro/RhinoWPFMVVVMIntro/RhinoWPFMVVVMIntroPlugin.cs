@@ -1,4 +1,3 @@
-using Rhino;
 using Rhino.PlugIns;
 using Rhino.UI;
 using RhinoWPFMVVVMIntro.Services;
@@ -20,9 +19,8 @@ namespace RhinoWPFMVVVMIntro
         {
             _instance = this;
 
-            RhinoDocService = new RhinoDocService(
-                RhinoDoc.ActiveDoc
-                    ?? throw new InvalidOperationException("Rhino active document was not found"));
+            RhinoDocService = new RhinoDocService();
+            LayerAssignmentService = new LayerAssignmentService();
         }
 
         /// <summary>
@@ -42,7 +40,8 @@ namespace RhinoWPFMVVVMIntro
         /// <summary>
         /// Provides plugin-wide access to Rhino document operations.
         /// </summary>
-        public IRhinoDocService RhinoDocService { get; }
+        public IRhinoDocService RhinoDocService { get; private set; }
+        public ILayerAssignemntService LayerAssignmentService { get; private set; }
 
         protected override LoadReturnCode OnLoad(ref string errorMessage)
         {

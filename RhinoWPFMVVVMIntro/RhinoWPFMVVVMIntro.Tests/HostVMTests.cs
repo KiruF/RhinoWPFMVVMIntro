@@ -30,6 +30,11 @@ public sealed class HostVMTests
         {
 
         }
+        public IReadOnlyList<Guid> GetSelectedObjectIds()
+        {
+            return [];
+        }
+
         public void Redraw()
         {
         }

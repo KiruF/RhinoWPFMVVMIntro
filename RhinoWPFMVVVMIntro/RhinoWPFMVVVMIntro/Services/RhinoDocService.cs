@@ -4,6 +4,8 @@ using Rhino.DocObjects;
 using Rhino.Geometry;
 using Rhino.Input.Custom;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq;
 using System.Reflection;
 
@@ -14,22 +16,22 @@ namespace RhinoWPFMVVVMIntro.Services
     /// </summary>
     public sealed class RhinoDocService : IRhinoDocService
     {
-        public readonly RhinoDoc Doc;
-
         ObjectEnumeratorSettings _settings = new ObjectEnumeratorSettings()
         {
             NormalObjects = true
         };
 
-        public RhinoDocService(RhinoDoc activeDocument)
+        public RhinoDocService()
         {
-            Doc = activeDocument
-                ?? throw new ArgumentNullException(nameof(activeDocument));
         }
 
         public void SelectAllRhinoObjects()
         {
-            foreach (RhinoObject rhinoObject in Doc.Objects.GetObjectList(_settings))
+            RhinoDoc doc = RhinoDoc.ActiveDoc;
+            if (doc == null)
+                return;
+
+            foreach (RhinoObject rhinoObject in doc.Objects.GetObjectList(_settings))
                 rhinoObject.Select(true);
 
             Redraw();
@@ -68,7 +70,23 @@ namespace RhinoWPFMVVVMIntro.Services
             Redraw();
         }
 
+        public IReadOnlyList<Guid> GetSelectedObjectIds()
+        {
+            RhinoDoc doc = RhinoDoc.ActiveDoc;
+            if (doc == null)
+                return [];
+
+            IReadOnlyList<Guid> objIds = [.. doc.Objects.GetSelectedObjects(false, false).Select(obj => obj.Id)];
+            return objIds;
+        }
+
         public void Redraw()
-            => Doc.Views.Redraw();
+        {
+            RhinoDoc doc = RhinoDoc.ActiveDoc;
+            if (doc == null)
+                return;
+
+            doc.Views.Redraw();
+        }
     }
 }

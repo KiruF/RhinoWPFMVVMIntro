@@ -35,12 +35,9 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         public ICommand SelectAllRhObjs
             => _selectAllRhObjs;
 
-        public ICommand CrazyRotate
-          => _crazyRotate;
-
-        public int Counter 
-        { 
-            get=> _counter; 
+        public int Counter
+        {
+            get => _counter;
             set
             {
                 if (_counter == value)
