@@ -53,5 +53,10 @@ public sealed class HostVMTests
         {
             ScaleSelectedRhinoObjectsCallCount++;
         }
+
+        public void MoveAwaySelectedRhinoObjects()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
