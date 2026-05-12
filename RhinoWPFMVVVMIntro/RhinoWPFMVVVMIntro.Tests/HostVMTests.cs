@@ -17,13 +17,31 @@ public sealed class HostVMTests
         Assert.That(rhinoDocService.SelectAllRhinoObjectsCallCount, Is.EqualTo(1));
     }
 
+    [Test]
+    public void ScaleSelectedRhObjs_ExecutesDocumentScaling()
+    {
+        var rhinoDocService = new TestRhinoDocService();
+        var hostVM = new HostVM(rhinoDocService);
+
+        hostVM.ScaleSelectedRhObjs.Execute(null);
+
+        Assert.That(rhinoDocService.ScaleSelectedRhinoObjectsCallCount, Is.EqualTo(1));
+    }
+
     sealed class TestRhinoDocService : IRhinoDocService
     {
         public int SelectAllRhinoObjectsCallCount { get; private set; }
 
+        public int ScaleSelectedRhinoObjectsCallCount { get; private set; }
+
         public void SelectAllRhinoObjects()
         {
             SelectAllRhinoObjectsCallCount++;
+        }
+
+        public void ScaleSelectedRhinoObjects()
+        {
+            ScaleSelectedRhinoObjectsCallCount++;
         }
 
         public IReadOnlyList<Guid> GetSelectedObjectIds()
@@ -33,6 +51,7 @@ public sealed class HostVMTests
 
         public void Redraw()
         {
+            ScaleSelectedRhinoObjectsCallCount++;
         }
     }
 }

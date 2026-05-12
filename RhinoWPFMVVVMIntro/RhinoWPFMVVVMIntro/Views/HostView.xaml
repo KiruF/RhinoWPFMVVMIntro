@@ -21,7 +21,11 @@
 
             <Button Padding="8,4"
                     Command="{Binding SelectAllRhObjs}"
-                    Content="Select all rhino objects" />
+                    Content="select all rhino objects" />
+
+            <Button Padding="8,4"
+                    Command="{Binding ScaleSelectedRhObjs}"
+                    Content="scale all rhino objects" />
 
             <views:LayerAssignmentView />
 
