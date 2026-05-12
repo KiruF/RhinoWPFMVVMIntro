@@ -56,7 +56,7 @@ public sealed class HostVMTests
 
         public void MoveAwaySelectedRhinoObjects()
         {
-            throw new NotImplementedException();
+
         }
     }
 }

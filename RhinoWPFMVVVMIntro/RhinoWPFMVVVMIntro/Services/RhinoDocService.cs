@@ -95,7 +95,7 @@ namespace RhinoWPFMVVVMIntro.Services
 
                 GeometryBase movedGeometry =
                     moveService.Move(rhinoObject.Geometry, direction);
-                Add(movedGeometry);
+               Replace(rhinoObject.Id, movedGeometry);
             }
             Redraw();
         }
