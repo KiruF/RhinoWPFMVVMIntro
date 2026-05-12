@@ -61,8 +61,11 @@ namespace RhinoWPFMVVVMIntro.Services
             RhinoDoc doc = GetDocOrThrow();
 
             obj.Attributes.LayerIndex = layerIdx;
-            doc.Objects.Add(obj.Geometry, obj.Attributes);
-            doc.Objects.Delete(obj);
+
+            if (doc.Layers[layerIdx].Name != obj.Id.ToString())
+                doc.Layers[layerIdx].Name = obj.Id.ToString();
+
+            doc.Objects.ModifyAttributes(obj, obj.Attributes, true);
         }
 
         static RhinoDoc GetDocOrThrow()
