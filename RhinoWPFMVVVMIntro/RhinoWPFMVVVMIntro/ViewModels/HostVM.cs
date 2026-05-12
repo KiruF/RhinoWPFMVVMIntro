@@ -14,6 +14,7 @@ namespace RhinoWPFMVVVMIntro.ViewModels
     public sealed class HostVM : PropertyChangedNotifier
     {
         readonly RelayCommand _selectAllRhObjs;
+        readonly RelayCommand _moveAwaySelectedRhObjs;
         readonly RelayCommand _scaleAllRhObjs;
         readonly IRhinoDocService _rhinoDocService;
 
@@ -28,7 +29,7 @@ namespace RhinoWPFMVVVMIntro.ViewModels
                 ?? throw new ArgumentNullException(nameof(rhinoDocService));
 
             _selectAllRhObjs = new RelayCommand(SelectAllRhObjsMethod);
-
+            _moveAwaySelectedRhObjs = new RelayCommand(MoveAwaySelectedRhObjsMetod);
             _scaleAllRhObjs = new RelayCommand(ScaleSelectedRhObjsMethod);
         }
 
@@ -37,6 +38,9 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         /// </summary>
         public ICommand SelectAllRhObjs
             => _selectAllRhObjs;
+
+        public ICommand MoveAwaySelectedRhObjs
+            => _moveAwaySelectedRhObjs;
 
         public ICommand ScaleSelectedRhObjs
             => _scaleAllRhObjs;
@@ -58,6 +62,18 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         {
             _rhinoDocService.SelectAllRhinoObjects();
             Counter++;
+        }
+        void MoveAwaySelectedRhObjsMetod(object? obj)
+        {
+            IReadOnlyList<Guid> selectedObjIds = _rhinoDocService.GetSelectedObjectIds();
+            List<GeometryBase> geometries = _rhinoDocService.GetGeometryFromIds(selectedObjIds);
+            
+            MoveGeometryService moveService = new MoveGeometryService();
+            for (int i = 0; i < geometries.Count; i++)
+            {
+                GeometryBase movedGeometry = moveService.Move(geometries[i]);
+                _rhinoDocService.Replace(selectedObjIds[i], movedGeometry);
+            }
         }
 
         void ScaleSelectedRhObjsMethod(object? obj)

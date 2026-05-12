@@ -14,10 +14,9 @@ namespace RhinoWPFMVVVMIntro.Services
             
         }
 
-        public GeometryBase Scale(GeometryBase geometry, double factor)
+        public GeometryBase Scale(GeometryBase? geometry, double factor)
         {
-            if (geometry == null)
-                throw new ArgumentNullException(nameof(geometry));
+            ArgumentNullException.ThrowIfNull(geometry);
 
             GeometryBase scaledGeometry = geometry.Duplicate();
             _ = scaledGeometry.Scale(factor);

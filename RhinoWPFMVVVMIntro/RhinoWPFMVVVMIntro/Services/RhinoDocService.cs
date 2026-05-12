@@ -53,12 +53,8 @@ namespace RhinoWPFMVVVMIntro.Services
         public void Redraw()
         {
             RhinoDoc doc = GetDocOrThrow();
-            doc.Views.Redraw();
+            doc.Views.Redraw(); 
         }
-
-        static RhinoDoc GetDocOrThrow()
-            => RhinoDoc.ActiveDoc
-            ?? throw new InvalidOperationException("Active doc is null.");
 
         public List<GeometryBase> GetGeometryFromIds(IReadOnlyList<Guid> selectedObjectsIds)
         {
@@ -77,5 +73,15 @@ namespace RhinoWPFMVVVMIntro.Services
 
             return selectedGeometries;
         }
+
+        public void Add (GeometryBase geometry)
+        {
+            RhinoDoc doc = GetDocOrThrow();
+            doc.Objects.Add(geometry);
+        }
+
+        static RhinoDoc GetDocOrThrow()
+            => RhinoDoc.ActiveDoc
+            ?? throw new InvalidOperationException("Active doc is null.");
     }
 }
