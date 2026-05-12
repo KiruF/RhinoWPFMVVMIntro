@@ -32,10 +32,6 @@
                     Content="Move away selected rhino object" />
 
             <views:LayerAssignmentView />
-            
-             <Button Padding="8,4"
-                    Command="{Binding MoveAwaySelectedRhObjs}"
-                    Content="Move away selected rhino object" />
 
         </StackPanel>
     </Grid>

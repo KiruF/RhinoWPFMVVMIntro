@@ -12,9 +12,6 @@ namespace RhinoWPFMVVVMIntro.Services
         IReadOnlyList<Guid> GetSelectedObjectIds();
 
         void SelectAllRhinoObjects();
-        void MoveAwaySelectedRhinoObjects();
-
-        void ScaleSelectedRhinoObjects();
 
         void Redraw();
 
