@@ -62,7 +62,7 @@ public sealed class HostVMTests
 
         public List<GeometryBase> GetGeometryFromIds(IReadOnlyList<Guid> selectedObjectsIds)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

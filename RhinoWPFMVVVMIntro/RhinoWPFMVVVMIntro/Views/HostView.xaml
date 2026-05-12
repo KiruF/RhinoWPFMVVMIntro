@@ -21,8 +21,7 @@
 
             <Button Padding="8,4"
                     Command="{Binding SelectAllRhObjs}"
-                    Content="Select all rhino objects" />                    
-                    Content="select all rhino objects" />
+                    Content="Select all rhino objects"/>
 
             <Button Padding="8,4"
                     Command="{Binding ScaleSelectedRhObjs}"
@@ -32,7 +31,7 @@
             
              <Button Padding="8,4"
                     Command="{Binding MoveAwaySelectedRhObjs}"
-                    Content="Move away selected rhino object" Click="Button_Click" />
+                    Content="Move away selected rhino object" />
 
         </StackPanel>
     </Grid>
