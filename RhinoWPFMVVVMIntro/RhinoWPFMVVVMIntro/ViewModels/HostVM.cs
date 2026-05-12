@@ -14,6 +14,7 @@ namespace RhinoWPFMVVVMIntro.ViewModels
     public sealed class HostVM : PropertyChangedNotifier
     {
         readonly RelayCommand _selectAllRhObjs;
+        readonly RelayCommand _moveAwaySelectedRhObjs;
         readonly RelayCommand _scaleAllRhObjs;
         readonly IRhinoDocService _rhinoDocService;
 
@@ -28,7 +29,7 @@ namespace RhinoWPFMVVVMIntro.ViewModels
                 ?? throw new ArgumentNullException(nameof(rhinoDocService));
 
             _selectAllRhObjs = new RelayCommand(SelectAllRhObjsMethod);
-
+            _moveAwaySelectedRhObjs = new RelayCommand(MoveAwaySelectedRhObjsMetod);
             _scaleAllRhObjs = new RelayCommand(ScaleSelectedRhObjsMethod);
         }
 
@@ -37,6 +38,8 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         /// </summary>
         public ICommand SelectAllRhObjs
             => _selectAllRhObjs;
+        public ICommand MoveAwaySelectedRhObjs
+            => _moveAwaySelectedRhObjs;
 
         public ICommand ScaleSelectedRhObjs
             => _scaleAllRhObjs;
@@ -57,6 +60,11 @@ namespace RhinoWPFMVVVMIntro.ViewModels
         void SelectAllRhObjsMethod(object? obj)
         {
             _rhinoDocService.SelectAllRhinoObjects();
+            Counter++;
+        }
+        void MoveAwaySelectedRhObjsMetod(object? obj)
+        {
+            _rhinoDocService.MoveAwaySelectedRhinoObjects();
             Counter++;
         }
 
