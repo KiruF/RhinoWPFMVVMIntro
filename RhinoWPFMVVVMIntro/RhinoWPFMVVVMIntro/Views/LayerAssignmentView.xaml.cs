@@ -19,7 +19,7 @@ namespace RhinoWPFMVVVMIntro.Views
             if (DesignerProperties.GetIsInDesignMode(this))
                 return;
 
-            DataContext = new LayerAssignmentVM(Plugin.Instance.LayerAssignmentService);
+            DataContext = new LayerAssignmentVM(Plugin.Instance.LayerAssignmentService, Plugin.Instance.RhinoDocService);
         }
     }
 }

@@ -26,6 +26,11 @@ public sealed class HostVMTests
             SelectAllRhinoObjectsCallCount++;
         }
 
+        public IReadOnlyList<Guid> GetSelectedObjectIds()
+        {
+            return [];
+        }
+
         public void Redraw()
         {
         }

@@ -1,5 +1,8 @@
 using Rhino;
 using Rhino.DocObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RhinoWPFMVVVMIntro.Services
 {
@@ -27,6 +30,16 @@ namespace RhinoWPFMVVVMIntro.Services
                 rhinoObject.Select(true);
 
             Redraw();
+        }
+
+        public IReadOnlyList<Guid> GetSelectedObjectIds()
+        {
+            RhinoDoc doc = RhinoDoc.ActiveDoc;
+            if (doc == null)
+                return [];
+
+            IReadOnlyList<Guid> objIds = [.. doc.Objects.GetSelectedObjects(false, false).Select(obj => obj.Id)];
+            return objIds;
         }
 
         public void Redraw()
