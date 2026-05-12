@@ -39,17 +39,17 @@ namespace RhinoWPFMVVVMIntro.Services
         {
             var selectedObjects = Doc.Objects.GetSelectedObjects(false, false);
 
-            if (!selectedObjects.Any())
-            {
-                GetObject getObjects = new GetObject();
-                getObjects.SetCommandPrompt("Select objects to CRAZY rotate");
-                getObjects.GetMultiple(1, 0);
+            //if (!selectedObjects.Any())
+            //{
+            //    GetObject getObjects = new GetObject();
+            //    getObjects.SetCommandPrompt("Select objects to CRAZY rotate");
+            //    getObjects.GetMultiple(1, 0);
 
-                if (getObjects.CommandResult() != Result.Success)
-                    return;
+            //    if (getObjects.CommandResult() != Result.Success)
+            //        return;
 
-                selectedObjects = [.. getObjects.Objects().Select(x => x.Object())];
-            }
+            //    selectedObjects = [.. getObjects.Objects().Select(x => x.Object())];
+            //}
 
             Random random = new();
 
