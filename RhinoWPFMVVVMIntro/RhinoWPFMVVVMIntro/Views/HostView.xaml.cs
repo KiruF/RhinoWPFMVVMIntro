@@ -21,5 +21,10 @@ namespace RhinoWPFMVVVMIntro.Views
 
             DataContext = new HostVM(Plugin.Instance.RhinoDocService);
         }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }
