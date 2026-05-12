@@ -1,6 +1,5 @@
 using Rhino;
 using Rhino.DocObjects;
-using System;
 
 namespace RhinoWPFMVVVMIntro.Services
 {
@@ -9,28 +8,34 @@ namespace RhinoWPFMVVVMIntro.Services
     /// </summary>
     public sealed class RhinoDocService : IRhinoDocService
     {
-        public readonly RhinoDoc Doc;
-
         ObjectEnumeratorSettings _settings = new ObjectEnumeratorSettings()
         {
             NormalObjects = true
         };
 
-        public RhinoDocService(RhinoDoc activeDocument)
+        public RhinoDocService()
         {
-            Doc = activeDocument
-                ?? throw new ArgumentNullException(nameof(activeDocument));
         }
 
         public void SelectAllRhinoObjects()
         {
-            foreach (RhinoObject rhinoObject in Doc.Objects.GetObjectList(_settings))
+            RhinoDoc doc = RhinoDoc.ActiveDoc;
+            if (doc == null)
+                return;
+
+            foreach (RhinoObject rhinoObject in doc.Objects.GetObjectList(_settings))
                 rhinoObject.Select(true);
 
             Redraw();
         }
 
         public void Redraw()
-            => Doc.Views.Redraw();
+        {
+            RhinoDoc doc = RhinoDoc.ActiveDoc;
+            if (doc == null)
+                return;
+
+            doc.Views.Redraw();
+        }
     }
 }

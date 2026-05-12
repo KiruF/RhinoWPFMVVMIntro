@@ -8,11 +8,8 @@ namespace RhinoWPFMVVVMIntro.Services
 {
     public class LayerAssignmentService : ILayerAssignemntService
     {
-        public readonly RhinoDoc Doc;
-
-        public LayerAssignmentService(RhinoDoc activeDocument)
+        public LayerAssignmentService()
         {
-            Doc = activeDocument ?? throw new ArgumentNullException(nameof(activeDocument));
         }
 
         public void AssignLayers()
@@ -28,21 +25,26 @@ namespace RhinoWPFMVVVMIntro.Services
         }
 
         private List<RhinoObject> GetSelectedObjects()
-            => [.. Doc.Objects.GetSelectedObjects(false, false)];
+        {
+            RhinoDoc doc = GetDocOrThrow();
+            return [.. doc.Objects.GetSelectedObjects(false, false)];
+        }
 
         private bool IsNextLayerAvailable(out int layerIdx)
         {
+            RhinoDoc doc = GetDocOrThrow();
+
             layerIdx = -1;
-            for (int i = 0; i < Doc.Layers.Count; i++)
+            for (int i = 0; i < doc.Layers.Count; i++)
             {
-                Layer layer = Doc.Layers[i];
+                Layer layer = doc.Layers[i];
                 ObjectEnumeratorSettings settings = new()
                 {
                     LayerIndexFilter = layer.Index,
                     NormalObjects = true
                 };
 
-                bool taken = Doc.Objects.GetObjectList(settings).Any();
+                bool taken = doc.Objects.GetObjectList(settings).Any();
                 if (!taken)
                 {
                     layerIdx = layer.Index;
@@ -54,13 +56,22 @@ namespace RhinoWPFMVVVMIntro.Services
         }
 
         private int CreateNewRhinoLayer()
-            => Doc.Layers.Add(new Layer());
+        {
+            RhinoDoc doc = GetDocOrThrow();
+            return doc.Layers.Add(new Layer());
+        }
 
         private void AddObjectToLayer(RhinoObject obj, int layerIdx)
         {
+            RhinoDoc doc = GetDocOrThrow();
+
             obj.Attributes.LayerIndex = layerIdx;
-            Doc.Objects.Add(obj.Geometry, obj.Attributes);
-            Doc.Objects.Delete(obj);
+            doc.Objects.Add(obj.Geometry, obj.Attributes);
+            doc.Objects.Delete(obj);
         }
+
+        static RhinoDoc GetDocOrThrow()
+            => RhinoDoc.ActiveDoc
+            ?? throw new InvalidOperationException("Active doc is null.");
     }
 }

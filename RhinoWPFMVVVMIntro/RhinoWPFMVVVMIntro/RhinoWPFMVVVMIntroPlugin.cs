@@ -20,17 +20,14 @@ namespace RhinoWPFMVVVMIntro
         {
             _instance = this;
             RhinoDoc.NewDocument += OnNewDoc;
+
+            RhinoDocService = new RhinoDocService();
+            LayerAssignmentService = new LayerAssignmentService();
         }
 
         void OnNewDoc(object? sender, DocumentEventArgs e)
         {
             RhinoDoc.NewDocument -= OnNewDoc;
-
-            RhinoDoc doc = e.Document
-                ?? throw new InvalidOperationException("Rhino active document was not found");
-
-            RhinoDocService = new RhinoDocService(doc);
-            LayerAssignmentService = new LayerAssignmentService(doc);
         }
 
         /// <summary>
