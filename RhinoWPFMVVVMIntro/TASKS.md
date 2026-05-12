@@ -9,4 +9,5 @@
 ### NB : 
 *- the document related functionality should only be called via ***RhinoWPFMVVVMIntro.Services.RhinoDocService**.
 *- if the functionality fails the user should be notified, use **System.Windows.MessageBox.Show** to let the user know what went wrong.*
+*- write tests in ***RhinoWPFMVVVMIntro.Tests**.
 
