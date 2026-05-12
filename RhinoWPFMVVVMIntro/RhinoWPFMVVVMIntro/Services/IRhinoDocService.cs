@@ -13,6 +13,8 @@ namespace RhinoWPFMVVVMIntro.Services
 
         void SelectAllRhinoObjects();
 
+        void ScaleSelectedRhinoObjects();
+
         void Redraw();
 
         void Replace(Guid rhinoObjectId, GeometryBase geometry);
