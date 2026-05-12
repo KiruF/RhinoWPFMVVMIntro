@@ -38,7 +38,7 @@ obj/x64/
 bin/x86/
 obj/x86/
 
-AllBuild/
+../AllBuild/
 
 [Ww][Ii][Nn]32/
 [Aa][Rr][Mm]/
