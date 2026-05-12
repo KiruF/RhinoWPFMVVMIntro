@@ -19,15 +19,9 @@ namespace RhinoWPFMVVVMIntro
         public RhinoWPFMVVVMIntroPlugin()
         {
             _instance = this;
-            RhinoDoc.NewDocument += OnNewDoc;
 
             RhinoDocService = new RhinoDocService();
             LayerAssignmentService = new LayerAssignmentService();
-        }
-
-        void OnNewDoc(object? sender, DocumentEventArgs e)
-        {
-            RhinoDoc.NewDocument -= OnNewDoc;
         }
 
         /// <summary>
