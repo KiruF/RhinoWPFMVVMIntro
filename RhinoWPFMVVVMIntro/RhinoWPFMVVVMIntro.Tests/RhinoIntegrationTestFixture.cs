@@ -4,17 +4,17 @@ namespace RhinoWPFMVVVMIntro.Tests;
 
 public abstract class RhinoIntegrationTestFixture
 {
-    protected RhinoDoc Document { get; private set; } = null!;
+    protected RhinoDoc Doc { get; private set; } = null!;
 
     [SetUp]
     public void CreateHeadlessDocument()
     {
-        Document = RhinoDoc.ActiveDoc ?? RhinoDoc.CreateHeadless(null!);
+        Doc = RhinoDoc.ActiveDoc ?? RhinoDoc.CreateHeadless(null!);
     }
 
     [TearDown]
     public void DisposeHeadlessDocument()
     {
-        Document?.Dispose();
+        Doc?.Dispose();
     }
 }

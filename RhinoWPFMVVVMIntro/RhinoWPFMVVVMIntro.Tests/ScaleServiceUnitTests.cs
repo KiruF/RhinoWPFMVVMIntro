@@ -1,15 +1,10 @@
 using Rhino.Geometry;
-using Rhino.Testing.Fixtures;
 using RhinoWPFMVVVMIntro.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RhinoWPFMVVVMIntro.Tests.Unit
+namespace RhinoWPFMVVVMIntro.Tests
 {
-    public class ScaleServiceUnitTests
+    [Category("RhinoIntegration")]
+    public sealed class ScaleServiceUnitTests : RhinoIntegrationTestFixture
     {
         [Test]
         public void Scale_NullGeometry_ThrowsArgumentNullException()
