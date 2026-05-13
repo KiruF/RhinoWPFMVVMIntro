@@ -2,26 +2,27 @@
 
 	<PropertyGroup>
 		<TargetFramework>net8.0-windows</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
 		<UseWPF>true</UseWPF>
-		<PlatformTarget>x64</PlatformTarget>
-		<Prefer32Bit>false</Prefer32Bit>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="coverlet.collector" Version="6.0.4" />
 		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.2" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-		<PackageReference Include="NUnit" Version="3.14.0" />
+		<PackageReference Include="NUnit" Version="4.3.2" />
 		<PackageReference Include="NUnit.Analyzers" Version="4.13.0"/>
 		<PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
 		<PackageReference Include="Rhino.Testing" Version="8.0.28-beta" />
-		<PackageReference Include="RhinoCommon" Version="8.28.26041.11001" />
+		<PackageReference Include="RhinoCommon" Version="8.28.26041.11001" IncludeAssets="compile;build" GeneratePathProperty="true"/>
 		<PackageReference Include="Grasshopper" Version="8.28.26041.11001" IncludeAssets="compile;build" />
+		<PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+		<PackageReference Include="System.Reflection.Metadata" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,7 +38,9 @@
 	</ItemGroup>
 
 	<Target Name="CopyPluginAssemblyForTestHost" AfterTargets="Build">
-		<Copy SourceFiles="..\AllBuild\net8.0-windows\RhinoWPFMVVVMIntro.rhp" DestinationFiles="$(OutputPath)RhinoWPFMVVVMIntro.dll" SkipUnchangedFiles="true" />
+		<Copy SourceFiles="..\AllBuild\net8.0-windows\RhinoWPFMVVVMIntro.rhp"
+			  DestinationFiles="$(OutputPath)RhinoWPFMVVVMIntro.dll"
+			  SkipUnchangedFiles="true" />
 	</Target>
 
 </Project>
